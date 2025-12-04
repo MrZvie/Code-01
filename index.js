@@ -1,10 +1,15 @@
 const express = require('express');
+const connectDB = require('./config/db');
+const userRoutes = require('./routes/userRoutes'); // add this
+
 const app = express();
+
+connectDB();
+
 app.use(express.json());
 
-// Import user routes
-const userRoutes = require('./routes/userRoutes');
-app.use('/users', userRoutes);
+// register routes
+app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
   res.send('Backend training server is running ✔️');
